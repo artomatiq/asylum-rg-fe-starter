@@ -63,13 +63,13 @@ function RenderLandingPage(props) {
       </div>
 
       <div className="view-more-data-btn-container">
-        <Button
-          type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
-          onClick={() => history.push('/graphs')}
-        >
+        <button type="button" className="view-button">
           View the Data
-        </Button>
+        </button>
+
+        <button type="button" className="download-button">
+          Download the Data
+        </button>
       </div>
 
       <div className="middle-section">
