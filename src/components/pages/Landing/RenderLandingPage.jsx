@@ -59,13 +59,19 @@ function RenderLandingPage(props) {
       </div>
 
       <div className="view-more-data-btn-container">
-        <button type="button" className="view-button">
+        <button
+          type="button"
+          className="view-button"
+          onClick={() => history.push('/graphs')}
+        >
           View the Data
         </button>
 
-        <button type="button" className="download-button">
-          Download the Data
-        </button>
+        <a href="https://humanrightsfirst.org/wp-content/uploads/2022/10/COW2021001887-I589Data.csv">
+          <button type="button" className="download-button">
+            Download the Data
+          </button>
+        </a>
       </div>
 
       <div className="middle-section">
