@@ -16,6 +16,11 @@ import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
+const API_URL_YEAR =
+  'https://hrf-asylum-be-b.herokuapp.com/cases/fiscalSummary';
+const API_URL_CTZN =
+  'https://hrf-asylum-be-b.herokuapp.com/cases/citizenshipSummary';
+
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
   let { office, view } = useParams();
