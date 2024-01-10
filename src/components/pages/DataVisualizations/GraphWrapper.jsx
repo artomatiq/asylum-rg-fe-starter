@@ -26,8 +26,9 @@ function GraphWrapper(props) {
   let { office, view } = useParams();
   if (!view) {
     set_view('time-series');
-    view = 'time-series';
   }
+
+  //decide which map to render
   let map_to_render;
   if (!office) {
     switch (view) {
@@ -111,9 +112,11 @@ function GraphWrapper(props) {
         });
     }
   }
+
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
+
   return (
     <div
       className="map-wrapper-container"
@@ -126,6 +129,7 @@ function GraphWrapper(props) {
       }}
     >
       <ScrollToTopOnMount />
+      {/* RENDER THE APPROPRIATE MAP HERE */}
       {map_to_render}
       <div
         className="user-input-sidebar-container"
