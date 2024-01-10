@@ -28,10 +28,11 @@ function GraphsContainer() {
 
   //heatMap inherently only applies to all offices
   function handle_office_select(value) {
+    console.log('value', value);
     if (view === 'office-heat-map') {
       set_view('time-series');
     }
-    if (value === 'All') {
+    if (value === 'all') {
       history.push(`/graphs/all/${view}`);
     }
     history.push(`/graphs/${value}/${view}`);
@@ -71,7 +72,7 @@ function GraphsContainer() {
             onSelect={value => handle_office_select(value)}
           >
             {offices.map((office, idx) =>
-              office === 'All' ? (
+              office === 'All Offices' ? (
                 <Option key={idx} value={'all'}>
                   {office}
                 </Option>
