@@ -74,7 +74,7 @@ function GraphWrapper(props) {
         |       })                          [ no `office` param in the query    ]         |
         |                                                                                 |
           _                                                                             _
-                                   -- Mack 
+                                  -- Mack 
     
     */
 
