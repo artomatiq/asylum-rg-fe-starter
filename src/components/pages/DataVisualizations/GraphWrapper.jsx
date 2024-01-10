@@ -23,9 +23,6 @@ function GraphWrapper(props) {
     set_view('time-series');
     view = 'time-series';
   }
-
-  console.log('******', process.env.REACT_APP_API_URL_YEAR);
-
   //decide which map to render
   let map_to_render;
   if (!office) {
@@ -80,7 +77,7 @@ function GraphWrapper(props) {
 
     if (office === 'all' || !office) {
       axios
-        .get(process.env.API_URL_YEAR, {
+        .get(process.env.REACT_APP_API_URL_YEAR, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -95,7 +92,7 @@ function GraphWrapper(props) {
         });
     } else {
       axios
-        .get(process.env.API_URL_YEAR, {
+        .get(process.env.REACT_APP_API_URL_YEAR, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
