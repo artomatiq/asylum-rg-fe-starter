@@ -16,11 +16,6 @@ import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
-const API_URL_YEAR =
-  'https://hrf-asylum-be-b.herokuapp.com/cases/fiscalSummary';
-const API_URL_CTZN =
-  'https://hrf-asylum-be-b.herokuapp.com/cases/citizenshipSummary';
-
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
   let { office, view } = useParams();
@@ -28,6 +23,8 @@ function GraphWrapper(props) {
     set_view('time-series');
     view = 'time-series';
   }
+
+  console.log('******', process.env.REACT_APP_API_URL_YEAR);
 
   //decide which map to render
   let map_to_render;
@@ -83,7 +80,7 @@ function GraphWrapper(props) {
 
     if (office === 'all' || !office) {
       axios
-        .get(process.env.REACT_APP_API_URL, {
+        .get(process.env.API_URL_YEAR, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -98,7 +95,7 @@ function GraphWrapper(props) {
         });
     } else {
       axios
-        .get(process.env.REACT_APP_API_URL, {
+        .get(process.env.API_URL_YEAR, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
