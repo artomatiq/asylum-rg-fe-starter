@@ -28,7 +28,6 @@ function GraphsContainer() {
 
   //heatMap inherently only applies to all offices
   function handle_office_select(value) {
-    console.log('value', value);
     if (view === 'office-heat-map') {
       set_view('time-series');
     }

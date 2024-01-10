@@ -26,6 +26,7 @@ function GraphWrapper(props) {
   let { office, view } = useParams();
   if (!view) {
     set_view('time-series');
+    view = 'time-series';
   }
 
   //decide which map to render
@@ -56,6 +57,7 @@ function GraphWrapper(props) {
         break;
     }
   }
+
   function updateStateWithNewData(years, view, office, stateSettingCallback) {
     /*
           _                                                                             _
@@ -81,7 +83,7 @@ function GraphWrapper(props) {
 
     if (office === 'all' || !office) {
       axios
-        .get(process.env.REACT_APP_API_URI, {
+        .get(process.env.REACT_APP_API_URL, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -96,7 +98,7 @@ function GraphWrapper(props) {
         });
     } else {
       axios
-        .get(process.env.REACT_APP_API_URI, {
+        .get(process.env.REACT_APP_API_URL, {
           // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
           params: {
             from: years[0],
@@ -142,6 +144,7 @@ function GraphWrapper(props) {
         }}
       >
         <ViewSelect set_view={set_view} />
+
         <YearLimitsSelect
           view={view}
           office={office}
