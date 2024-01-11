@@ -14,6 +14,7 @@ const { primary_accent_color } = colors;
 
 const mapStateToProps = (state, ownProps) => {
   const { view, office } = ownProps;
+
   if (office === 'all' || !office) {
     switch (view) {
       case 'time-series':
@@ -54,6 +55,7 @@ const mapStateToProps = (state, ownProps) => {
 function YearLimitsSelect(props) {
   let { view, office, dispatch, clearQuery, updateStateWithNewData, years } =
     props;
+
   const yearInputsOnChange = (view, office, e) => {
     dispatch(
       setHeatMapYears(
@@ -64,11 +66,17 @@ function YearLimitsSelect(props) {
       )
     );
   };
+
   const stateSettingFn = (view, office, data) => {
+    //this is the function which filters the data for a specific plot
     const plotlyReadyData = rawApiDataToPlotlyReadyInfo(view, office, data);
+
+    //this function sets only the necessary data into state, into the appropriate object based on view and office
     dispatch(setVisualizationData(view, office, plotlyReadyData));
   };
+
   const [form] = Form.useForm();
+
   useInterval(() => {
     form.setFieldsValue({
       year_start: years[0],

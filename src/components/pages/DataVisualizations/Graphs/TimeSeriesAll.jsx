@@ -23,6 +23,7 @@ function TimeSeriesAll(props) {
     '% Admin Close / Dismissal',
     '% Denied',
   ];
+
   useEffect(() => {
     if (timeSeriesAllData.rowsForAllDisplay === undefined) {
       setRowsForAllDisplay([]);
@@ -30,6 +31,7 @@ function TimeSeriesAll(props) {
       setRowsForAllDisplay(timeSeriesAllData.rowsForAllDisplay);
     }
   }, [timeSeriesAllData]);
+
   return (
     <div
       className="time-series-all-container"
@@ -42,6 +44,7 @@ function TimeSeriesAll(props) {
       }}
     >
       <p>Showing: Time series data for all USCIS Asylum Offices</p>
+
       <Plot
         data={[
           {
@@ -70,12 +73,14 @@ function TimeSeriesAll(props) {
             ],
             title: 'Fiscal Year',
           },
+
           paper_bgcolor: background_color,
           hoverlabel: {
             bordercolor: background_color,
           },
         }}
       />
+
       <p>Table view</p>
       <Table
         columns={columnsForAllDisplay}

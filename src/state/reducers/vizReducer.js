@@ -29,6 +29,7 @@ import {
       ------------------------------------------------------
 */
 const currentYear = new Date().getFullYear();
+
 export const initialState = {
   timeSeriesAllData: {},
   timeSeriesAllYears: [2015, currentYear],
