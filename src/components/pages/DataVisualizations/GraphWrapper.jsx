@@ -12,6 +12,7 @@ import axios from 'axios';
 import { resetVisualizationQuery } from '../../../state/actionCreators';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
+import test_data from '../../../data/test_data.json';
 
 const { background_color } = colors;
 
@@ -52,71 +53,68 @@ function GraphWrapper(props) {
   }
 
   function updateStateWithNewData(years, view, office, stateSettingCallback) {
-    if (view === 'citizenship') {
-      if (office === 'all' || !office) {
-        axios
-          .get(process.env.REACT_APP_API_URL_CTZN, {
-            params: {
-              from: years[0],
-              to: years[1],
-            },
-          })
-          .then(result => {
-            console.log(result.data);
-            stateSettingCallback(view, office, result.data);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      } else {
-        axios
-          .get(process.env.REACT_APP_API_URL_CTZN, {
-            params: {
-              from: years[0],
-              to: years[1],
-              office: office,
-            },
-          })
-          .then(result => {
-            console.log(result.data);
-            stateSettingCallback(view, office, result.data);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      }
-    } else if (view === 'time-series' || view === 'office-heat-map') {
-      if (office === 'all' || !office) {
-        axios
-          .get(process.env.REACT_APP_API_URL_YEAR, {
-            params: {
-              from: years[0],
-              to: years[1],
-            },
-          })
-          .then(result => {
-            stateSettingCallback(view, office, result.data);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      } else {
-        axios
-          .get(process.env.REACT_APP_API_URL_YEAR, {
-            params: {
-              from: years[0],
-              to: years[1],
-              office: office,
-            },
-          })
-          .then(result => {
-            stateSettingCallback(view, office, result.data);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      }
+    const getData = (url, params) => axios.get(url, { params });
+    let params = null;
+
+    if (office === 'all' || !office) {
+      params = {
+        from: years[0],
+        to: years[1],
+      };
+    } else {
+      params = {
+        from: years[0],
+        to: years[1],
+        office: office,
+      };
     }
+
+    Promise.all([
+      getData(process.env.REACT_APP_API_URL_YEAR, params),
+      getData(process.env.REACT_APP_API_URL_CTZN, params),
+    ])
+      .then(([fiscal, citizen]) => {
+        fiscal.data.citizenshipResults = citizen.data;
+        const combinedData = [fiscal.data];
+        console.log(test_data);
+        console.log(combinedData);
+
+        stateSettingCallback(view, office, combinedData);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    // if (office === 'all' || !office) {
+    //   axios
+    //     .get(process.env.REACT_APP_API_URL_YEAR, {
+    //       params: {
+    //         from: years[0],
+    //         to: years[1],
+    //       },
+    //     })
+    //     .then(result => {
+    //       stateSettingCallback(view, office, result.data);
+    //     })
+    //     .catch(err => {
+    //       console.error(err);
+    //     });
+    // } else {
+    //   axios
+    //     .get(process.env.REACT_APP_API_URL_YEAR, {
+    //       params: {
+    //         from: years[0],
+    //         to: years[1],
+    //         office: office,
+    //       },
+    //     })
+    //     .then(result => {
+    //       stateSettingCallback(view, office, result.data);
+    //     })
+    //     .catch(err => {
+    //       console.error(err);
+    //     });
+    // }
   }
 
   const clearQuery = (view, office) => {
