@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Form, Button, Input } from 'antd';
+import { Form, Button /*Input*/ } from 'antd';
 import {
   setVisualizationData,
-  setHeatMapYears,
+  // setHeatMapYears,
 } from '../../../state/actionCreators';
-import YearLimitsSlider from './YearLimitsSlider';
+// import YearLimitsSlider from './YearLimitsSlider';
 import { rawApiDataToPlotlyReadyInfo, useInterval } from '../../../utils';
 
 import { connect } from 'react-redux';
@@ -14,7 +14,6 @@ const { primary_accent_color } = colors;
 
 const mapStateToProps = (state, ownProps) => {
   const { view, office } = ownProps;
-
   if (office === 'all' || !office) {
     switch (view) {
       case 'time-series':
@@ -55,28 +54,20 @@ const mapStateToProps = (state, ownProps) => {
 function YearLimitsSelect(props) {
   let { view, office, dispatch, clearQuery, updateStateWithNewData, years } =
     props;
-
-  const yearInputsOnChange = (view, office, e) => {
-    dispatch(
-      setHeatMapYears(
-        view,
-        office,
-        e.target.id.includes('year_start') ? 0 : 1,
-        e.target.value
-      )
-    );
-  };
-
+  // const yearInputsOnChange = (view, office, e) => {
+  //   dispatch(
+  //     setHeatMapYears(
+  //       view,
+  //       office,
+  //       e.target.id.includes('year_start') ? 0 : 1,
+  //       e.target.value
+  //     ));
+  // };
   const stateSettingFn = (view, office, data) => {
-    //this is the function which filters the data for a specific plot
     const plotlyReadyData = rawApiDataToPlotlyReadyInfo(view, office, data);
-
-    //this function sets only the necessary data into state, into the appropriate object based on view and office
     dispatch(setVisualizationData(view, office, plotlyReadyData));
   };
-
   const [form] = Form.useForm();
-
   useInterval(() => {
     form.setFieldsValue({
       year_start: years[0],
@@ -85,7 +76,6 @@ function YearLimitsSelect(props) {
   }, 10);
 
   useEffect(() => {
-    //this triggeres the API call in GraphWrapper
     updateStateWithNewData(years, view, office, stateSettingFn);
   });
 
@@ -98,14 +88,13 @@ function YearLimitsSelect(props) {
         minHeight: '50px',
       }}
     >
-      <YearLimitsSlider
+      {/* <YearLimitsSlider
         office={office}
         view={view}
         lowerLimit={2015}
         upperLimit={2022}
         step={1}
-      />
-
+      /> */}
       <Form
         form={form}
         name="yearLimitsSelect"
@@ -122,54 +111,52 @@ function YearLimitsSelect(props) {
           // alignItems: 'center',
         }}
       >
-        <Form.Item
+        {/* <Form.Item
           label="From:"
           name="year_start"
           rules={[
             { required: true },
-            {
-              validator: (_, value) => {
-                return value &&
-                  parseInt(value) === value &&
-                  value >= 2015 &&
-                  value <= 2022
-                  ? Promise.resolve()
-                  : Promise.reject(
-                      'Please enter a year between 2015 and 2022.'
-                    );
-              },
-            },
+            // {
+            //   validator: (_, value) => {
+            //     return value &&
+            //       parseInt(value) === value &&
+            //       value >= 2015 &&
+            //       value <= 2022
+            //       ? Promise.resolve()
+            //       : Promise.reject(
+            //           'Please enter a year between 2015 and 2022.'
+            //         );
+            //   },
+            // },
           ]}
           onChange={e => yearInputsOnChange(view, office, e)}
         >
           <Input />
         </Form.Item>
-
         <Form.Item
           label="To:"
           name="year_end"
           style={{ marginLeft: '17px' }}
           rules={[
             { required: true },
-            {
-              validator: (_, value) => {
-                return value &&
-                  parseInt(value) === value &&
-                  value >= 2015 &&
-                  value <= 2022 &&
-                  value > form.getFieldValue('year_start')
-                  ? Promise.resolve()
-                  : Promise.reject(
-                      "Please enter a year between 2015 and 2022, and after the 'From:' year."
-                    );
-              },
-            },
+            // {
+            //   validator: (_, value) => {
+            //     return value &&
+            //       parseInt(value) === value &&
+            //       value >= 2015 &&
+            //       value <= 2022 &&
+            //       value > form.getFieldValue('year_start')
+            //       ? Promise.resolve()
+            //       : Promise.reject(
+            //           "Please enter a year between 2015 and 2022, and after the 'From:' year."
+            //         );
+            //   },
+            // },
           ]}
           onChange={e => yearInputsOnChange(view, office, e)}
         >
           <Input />
-        </Form.Item>
-
+        </Form.Item> */}
         <Form.Item>
           <Button
             htmlType="submit"
@@ -185,7 +172,6 @@ function YearLimitsSelect(props) {
           </Button>
         </Form.Item>
       </Form>
-
       <Button
         style={{
           width: '122px', // this is to match the width of the Form.Item button
