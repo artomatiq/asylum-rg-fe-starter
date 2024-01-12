@@ -12,7 +12,6 @@ import axios from 'axios';
 import { resetVisualizationQuery } from '../../../state/actionCreators';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
-import test_data from '../../../data/test_data.json';
 
 const { background_color } = colors;
 
