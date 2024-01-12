@@ -76,45 +76,11 @@ function GraphWrapper(props) {
       .then(([fiscal, citizen]) => {
         fiscal.data.citizenshipResults = citizen.data;
         const combinedData = [fiscal.data];
-        console.log(test_data);
-        console.log(combinedData);
-
         stateSettingCallback(view, office, combinedData);
       })
       .catch(err => {
         console.error(err);
       });
-
-    // if (office === 'all' || !office) {
-    //   axios
-    //     .get(process.env.REACT_APP_API_URL_YEAR, {
-    //       params: {
-    //         from: years[0],
-    //         to: years[1],
-    //       },
-    //     })
-    //     .then(result => {
-    //       stateSettingCallback(view, office, result.data);
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //     });
-    // } else {
-    //   axios
-    //     .get(process.env.REACT_APP_API_URL_YEAR, {
-    //       params: {
-    //         from: years[0],
-    //         to: years[1],
-    //         office: office,
-    //       },
-    //     })
-    //     .then(result => {
-    //       stateSettingCallback(view, office, result.data);
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //     });
-    // }
   }
 
   const clearQuery = (view, office) => {
