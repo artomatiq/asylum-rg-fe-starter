@@ -85,6 +85,7 @@ function YearLimitsSelect(props) {
   }, 10);
 
   useEffect(() => {
+    //this triggeres the API call in GraphWrapper
     updateStateWithNewData(years, view, office, stateSettingFn);
   });
 
