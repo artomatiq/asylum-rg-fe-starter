@@ -1,14 +1,15 @@
 import React from 'react';
 import { Image } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const { primary_accent_color } = colors;
 
-const loggedIn = true;
-
 function HeaderContent() {
+  const { loginWithRedirect, logout, user, isLoading } = useAuth0();
+
   return (
     <div
       style={{
@@ -23,14 +24,16 @@ function HeaderContent() {
           <Image width={100} src={Logo} preview={false} alt="HRF logo white" />
         </a>
       </div>
+
       <div>
-        <Link to="/" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+        <Link to="/" style={{ color: '#E2F0F7', marginRight: '75px' }}>
           Home
         </Link>
-        <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+        <Link to="/graphs" style={{ color: '#E2F0F7', marginRight: '75px' }}>
           Graphs
         </Link>
-        {loggedIn && (
+
+        {!isLoading && user && (
           <Link
             to="/profile"
             style={{ color: '#E2F0F7', paddingRight: '75px' }}
@@ -38,9 +41,24 @@ function HeaderContent() {
             Profile
           </Link>
         )}
-        <Link to="/login" style={{ color: '#E2F0F7' }}>
-          {loggedIn ? 'Logout' : 'Login'}
-        </Link>
+
+        {!isLoading && !user && (
+          <span
+            onClick={() => loginWithRedirect()}
+            style={{ color: '#E2F0F7', cursor: 'pointer' }}
+          >
+            Login
+          </span>
+        )}
+
+        {!isLoading && user && (
+          <span
+            onClick={() => logout()}
+            style={{ color: '#E2F0F7', cursor: 'pointer' }}
+          >
+            Logout
+          </span>
+        )}
       </div>
     </div>
   );
