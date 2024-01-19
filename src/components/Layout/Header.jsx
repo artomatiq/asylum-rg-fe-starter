@@ -31,7 +31,10 @@ function HeaderContent() {
           Graphs
         </Link>
         {loggedIn && (
-          <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+          <Link
+            to="/profile"
+            style={{ color: '#E2F0F7', paddingRight: '75px' }}
+          >
             Profile
           </Link>
         )}
