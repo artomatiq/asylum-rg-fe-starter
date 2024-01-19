@@ -6,7 +6,7 @@ import { colors } from '../../styles/data_vis_colors';
 
 const { primary_accent_color } = colors;
 
-const loggedIn = false;
+const loggedIn = true;
 
 function HeaderContent() {
   return (
