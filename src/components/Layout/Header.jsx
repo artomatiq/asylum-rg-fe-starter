@@ -6,6 +6,8 @@ import { colors } from '../../styles/data_vis_colors';
 
 const { primary_accent_color } = colors;
 
+const loggedIn = false;
+
 function HeaderContent() {
   return (
     <div
@@ -25,8 +27,16 @@ function HeaderContent() {
         <Link to="/" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
           Home
         </Link>
-        <Link to="/graphs" style={{ color: '#E2F0F7' }}>
+        <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
           Graphs
+        </Link>
+        {loggedIn && (
+          <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+            Profile
+          </Link>
+        )}
+        <Link to="/login" style={{ color: '#E2F0F7' }}>
+          {loggedIn ? 'Logout' : 'Login'}
         </Link>
       </div>
     </div>
