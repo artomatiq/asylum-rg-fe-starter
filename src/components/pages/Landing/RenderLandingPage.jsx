@@ -2,6 +2,7 @@ import React from 'react';
 import GrantRatesByOfficeImg from '../../../styles/Images/bar-graph-no-text.png';
 import GrantRatesByNationalityImg from '../../../styles/Images/pie-chart-no-text.png';
 import GrantRatesOverTimeImg from '../../../styles/Images/line-graph-no-text.png';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import HrfPhoto from '../../../styles/Images/paper-stack.jpg';
 import '../../../styles/RenderLandingPage.less';
@@ -15,6 +16,9 @@ function RenderLandingPage(props) {
   };
 
   const history = useHistory();
+  const { isLoading } = useAuth0();
+
+  if (isLoading) return null;
 
   return (
     <div className="main">

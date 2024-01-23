@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'antd';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -9,6 +9,15 @@ const { primary_accent_color } = colors;
 
 function HeaderContent() {
   const { loginWithRedirect, logout, user, isLoading } = useAuth0();
+
+  const authenticated = user && !isLoading;
+
+  if (isLoading)
+    return (
+      <span style={{ color: '#E2F0F7', marginRight: '75px' }}>
+        Loading User...
+      </span>
+    );
 
   return (
     <div
@@ -33,16 +42,13 @@ function HeaderContent() {
           Graphs
         </Link>
 
-        {!isLoading && user && (
-          <Link
-            to="/profile"
-            style={{ color: '#E2F0F7', paddingRight: '75px' }}
-          >
+        {authenticated && (
+          <Link to="/profile" style={{ color: '#E2F0F7', marginRight: '75px' }}>
             Profile
           </Link>
         )}
 
-        {!isLoading && !user && (
+        {!authenticated && (
           <span
             onClick={() => loginWithRedirect()}
             style={{ color: '#E2F0F7', cursor: 'pointer' }}
@@ -51,7 +57,7 @@ function HeaderContent() {
           </span>
         )}
 
-        {!isLoading && user && (
+        {authenticated && (
           <span
             onClick={() => logout()}
             style={{ color: '#E2F0F7', cursor: 'pointer' }}
