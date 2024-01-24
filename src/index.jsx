@@ -1,10 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route,
-  /*useHistory*/ Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Auth0ProviderWithHistory from './auth0Provider';
 import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
