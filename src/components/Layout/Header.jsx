@@ -12,13 +12,6 @@ function HeaderContent() {
 
   const authenticated = user && !isLoading;
 
-  if (isLoading)
-    return (
-      <span style={{ color: '#E2F0F7', marginRight: '75px' }}>
-        Loading User...
-      </span>
-    );
-
   return (
     <div
       style={{

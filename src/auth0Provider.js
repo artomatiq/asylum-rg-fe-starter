@@ -9,7 +9,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const history = useHistory();
 
   const onRedirectCallback = appState => {
-    console.log('appState', appState);
     history.push(appState?.returnTo || window.location.pathname);
   };
 
@@ -26,8 +25,3 @@ const Auth0ProviderWithHistory = ({ children }) => {
 };
 
 export default Auth0ProviderWithHistory;
-
-//it uses the Auth0Provider that comes from the SDK. It's gonna create a provider around that.
-//And then we're gonna tell it what the configurations are.
-
-//the main thing we're trying to do here is use useHistory from React Router to attach it to this provider
