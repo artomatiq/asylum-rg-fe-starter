@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
-const h = null;
 
 const ProfilePage = () => {
   const { user, isLoading } = useAuth0();
