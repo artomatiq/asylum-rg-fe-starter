@@ -7,7 +7,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import HrfPhoto from '../../../styles/Images/paper-stack.jpg';
 import '../../../styles/RenderLandingPage.less';
 import { useHistory } from 'react-router-dom';
-// import PageNav from '../../common/PageNav';
 
 function RenderLandingPage(props) {
   const scrollToTop = () => {

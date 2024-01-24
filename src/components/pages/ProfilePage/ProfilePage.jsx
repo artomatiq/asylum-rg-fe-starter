@@ -2,10 +2,8 @@ import React from 'react';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 
 const ProfilePage = () => {
-  const { user, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const { name, picture, email } = user;
-
-  if (isLoading) return null;
 
   return (
     <div
@@ -27,4 +25,10 @@ const ProfilePage = () => {
   );
 };
 
-export default withAuthenticationRequired(ProfilePage);
+export default withAuthenticationRequired(ProfilePage, {
+  onRedirecting: () => (
+    <h1 style={{ fontFamily: 'acumin', alignSelf: 'center', margin: '30vh' }}>
+      Redirecting to Login...
+    </h1>
+  ),
+});
